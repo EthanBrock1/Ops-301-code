@@ -19,11 +19,13 @@ read chmd
 
 # Navigates to the directory input by the user and changes all files inside it
 # to the input setting.
-cd "$dirpat"
-chmod -R "$chmd" .
+
+chmod -R $chmd $dirpat
 
 # Prints to the screen the directory contents and the new permissions settings 
 # of everything in the directory.
 
 echo "New permissions settings for files in $dirpat:"
-ls -la "$dirpat"
+ls -la $dirpat
+
+# end
