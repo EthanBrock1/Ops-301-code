@@ -37,8 +37,12 @@ sudo truncate -s 0 "$log1" "$log2"
 # Print to screen the file size of the compressed file
 
 bckup=$(stat -c%s backup-*.tar.gz)
-echo "The new compressed file size is: $bckup ."
+echo "The new compressed file size is: $bckup bytes."
 
 # Compare the size of the compressed files to the size of the original log files
 
-echo "$stat1"
+echo "Original size of $log1 = $stat1 bytes."
+echo "Original size of $log2 = $stat2 bytes."
+echo "New compressed file size: $bckup bytes."
+
+# End
