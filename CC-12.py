@@ -44,16 +44,65 @@
 # This will return status code 200. Look it up at
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
+# ChatGPT was used to help. especially in figureing out how to link everything
     # Start Code
+
 import requests
 
-# Prompt the user to type a string input as the variable for your destination
-# URL.
-http = input("Please enter the destination URL.")
+# Prompt user to enter a destination URL
+url = input("Enter the URL: ")
 
-# Prompt the user to select a HTTP Method
-method = ["GET", "POST", "PUT", "DELETE", "HEAD", "PATCH", "OPTIONS"]
+# Prompt user to select HTTP method
+method = input("Select an HTTP method (GET, POST, PUT, DELETE, HEAD, PATCH, OPTIONS): ")
 
+# Print the entire request that will be sent
+print(f"Sending {method} request to {url}")
+
+# Confirm with user before proceeding
+confirm = input("Do you want to proceed? (y/n): ")
+
+if confirm.lower() == 'y':
+    # Make the request using requests library
+    response = requests.request(method, url)
+
+    # Print the status code and reason phrase
+    print(f"Status Code: {response.status_code} - {response.reason}")
+
+    # Translate code to plain text
+    if response.status_code == 200:
+        status_text = "OK"
+    elif response.status_code == 201:
+        status_text = "Created"
+    elif response.status_code == 204:
+        status_text = "No Content"
+    elif response.status_code == 304:
+        status_text = "Not Modified"
+    elif response.status_code == 400:
+        status_text = "Bad Request"
+    elif response.status_code == 401:
+        status_text = "Unauthorized"
+    elif response.status_code == 403:
+        status_text = "Forbidden"
+    elif response.status_code == 404:
+        status_text = "Not Found"
+    elif response.status_code == 409:
+        status_text = "Request Conflict"
+    elif response.status_code == 410:
+        status_text = "URI no longer exists and has been permanently removed"
+    elif response.status_code == 500:
+        status_text = "Internal Server Error"
+    else:
+        status_text = "Unknown Error"
+
+    print(f"Status: {status_text}")
+
+    # Print the response headers
+    print("\nResponse Headers:")
+    for header, value in response.headers.items():
+        print(f"{header}: {value}")
+
+else:
+    print("Request cancelled.")
 
 
     # End Code
